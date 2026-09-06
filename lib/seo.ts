@@ -16,12 +16,7 @@ export function organizationJsonLd() {
     alternateName: site.shortcut,
     url: baseUrl(),
     description: site.descriptor,
-    email: site.email,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "الرياض",
-      addressCountry: "SA",
-    },
+    areaServed: { "@type": "Country", name: "السعودية" },
     sameAs: [site.linkedin],
   };
 }
