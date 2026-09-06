@@ -126,9 +126,12 @@
 [data-theme="dark"] .brand,
 [data-theme="dark"] .brand-word,
 [data-theme="dark"] .menu-toggle,
+[data-theme="dark"] .menu-toggle:hover,
 [data-theme="dark"] .nav-links a { color: var(--heading); }
+[data-theme="dark"] .mobile-menu a { color: var(--heading); }
 [data-theme="dark"] .brand-word small,
-[data-theme="dark"] .nav-links a.active { color: var(--gold-soft); }
+[data-theme="dark"] .nav-links a.active,
+[data-theme="dark"] .mobile-menu a.active { color: var(--gold-soft); }
 [data-theme="dark"] .field label,
 [data-theme="dark"] .tool-q,
 [data-theme="dark"] .quote,
