@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks, ctas } from "@/lib/content";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,7 @@ export function Header() {
             })}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <ThemeToggle />
             <Link className="button button-primary" href="/contact">
               {ctas.consultation}
             </Link>

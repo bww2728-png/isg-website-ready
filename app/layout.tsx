@@ -51,10 +51,13 @@ export const viewport: Viewport = {
   themeColor: "#0a2540",
 };
 
+const themeScript = `(function(){try{var t;try{t=localStorage.getItem('isg-theme')}catch(e){}if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}})();`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${plexSansArabic.variable} ${inter.variable}`}>
+    <html lang="ar" dir="rtl" className={`${plexSansArabic.variable} ${inter.variable}`} suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <a className="skip-link" href="#main">
           تجاوز إلى المحتوى
         </a>
