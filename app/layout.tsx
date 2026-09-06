@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { organizationJsonLd, financialServiceJsonLd, baseUrl } from "@/lib/seo";
+
+const plexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-latin",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,16 +35,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ar_SA",
     siteName: "ISG — بوابة الحلول المبتكرة",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "ISG — بوابة الحلول المبتكرة" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ISG | بوابة الحلول المبتكرة",
+    description: "نبني شركات أقوى. ونجهز فرصاً أكثر احترافية.",
+    images: ["/og-image.png"],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl">
-      <head>
-        <JsonLd data={organizationJsonLd()} />
-        <JsonLd data={financialServiceJsonLd()} />
-      </head>
+    <html lang="ar" dir="rtl" className={`${plexSansArabic.variable} ${inter.variable}`}>
       <body>
         <a className="skip-link" href="#main">
           تجاوز إلى المحتوى
@@ -37,6 +55,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={financialServiceJsonLd()} />
       </body>
     </html>
   );

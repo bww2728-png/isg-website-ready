@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SelfAssessment from "@/components/tools/SelfAssessment";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "التقييم الذاتي للشركة",
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
 export default function SelfAssessmentPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero" id="top">
         <div className="container">
           <span className="eyebrow">الأدوات</span>
           <h1>التقييم الذاتي للشركة</h1>
-          <p>
+          <p className="lead">
             أجب على 15 سؤالاً في 4 محاور، واحصل فوراً على قراءة أولية لموضع شركتك وتوصية
             بالخطوة الأعلى أثراً.
           </p>
@@ -23,7 +24,9 @@ export default function SelfAssessmentPage() {
       <section className="section">
         <div className="container">
           <div className="tool-shell">
-            <SelfAssessment />
+            <Reveal>
+              <SelfAssessment />
+            </Reveal>
           </div>
         </div>
       </section>

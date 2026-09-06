@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { SectionHeading, ButtonLink } from "@/components/ui";
+import { Icon } from "@/components/Icon";
+import { Reveal } from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { services } from "@/lib/content";
@@ -41,11 +44,18 @@ export default async function ServicePage({
 
       <div className="page-hero">
         <div className="container">
+          <nav className="breadcrumb" aria-label="مسار التنقل">
+            <Link href="/">الرئيسية</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/services">الخدمات</Link>
+          </nav>
           <span className="eyebrow">الوحدة {service.number}</span>
           <h1>{service.title}</h1>
-          <p className="lead">{service.promise}</p>
+          <p className="lead" style={{ color: "#d6e0ea" }}>{service.promise}</p>
           <div className="actions">
-            <ButtonLink href="/contact">ناقش هذه الخدمة</ButtonLink>
+            <ButtonLink href="/contact" icon="arrow-left">
+              ناقش هذه الخدمة
+            </ButtonLink>
           </div>
         </div>
       </div>
@@ -54,14 +64,15 @@ export default async function ServicePage({
         <div className="container">
           <SectionHeading eyebrow="ماذا نقدم" title={service.marketing} />
           <p className="lead">{service.broader}</p>
-          <h3>{service.headline}</h3>
+          <h3 className="mt-6">{service.headline}</h3>
           <div className="grid-4">
             {service.outputs.map((output, index) => (
-              <div key={index} className="card">
-                <span className="mini-label">مخرج</span>
-                <p>{output}</p>
-                <h3>{output}</h3>
-              </div>
+              <Reveal key={output} delay={index * 70}>
+                <div className="card accent-top">
+                  <span className="mini-label">مخرج</span>
+                  <p className="mt-2" style={{ fontWeight: 600, color: "var(--navy-800)" }}>{output}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -71,7 +82,7 @@ export default async function ServicePage({
         <div className="container">
           <SectionHeading eyebrow="الإطار" title="ما نحلّه / ما نقدمه / ما يتغيّر" />
           {service.problems.map((problem, index) => (
-            <div key={index} className="triple">
+            <Reveal key={index} delay={index * 70} className="triple">
               <div className="card">
                 <span className="mini-label">ما نحلّه</span>
                 <p>{problem.problem}</p>
@@ -84,7 +95,7 @@ export default async function ServicePage({
                 <span className="mini-label">ما يتغيّر</span>
                 <p>{problem.change}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -99,10 +110,13 @@ export default async function ServicePage({
                   <p className="lead">{block.intro}</p>
                   <div className="grid-3">
                     {block.items.map((item, index) => (
-                      <div key={index} className="card">
-                        <h3>{item.title}</h3>
-                        <p>{item.text}</p>
-                      </div>
+                      <Reveal key={index} delay={index * 80}>
+                        <div className="card accent-top">
+                          <span className="number">0{index + 1}</span>
+                          <h3>{item.title}</h3>
+                          <p>{item.text}</p>
+                        </div>
+                      </Reveal>
                     ))}
                   </div>
                 </div>
@@ -115,10 +129,15 @@ export default async function ServicePage({
                   <SectionHeading eyebrow="الفئات" title={block.title} />
                   <div className="grid-4">
                     {block.items.map((item, index) => (
-                      <div key={index} className="card">
-                        <h3>{item.title}</h3>
-                        <p>{item.text}</p>
-                      </div>
+                      <Reveal key={index} delay={index * 70}>
+                        <div className="card">
+                          <span className="card-icon">
+                            <Icon name={index % 2 === 0 ? "user" : "gear"} size={22} />
+                          </span>
+                          <h3>{item.title}</h3>
+                          <p>{item.text}</p>
+                        </div>
+                      </Reveal>
                     ))}
                   </div>
                 </div>
@@ -129,7 +148,7 @@ export default async function ServicePage({
               <section key={blockIndex} className="section">
                 <div className="container">
                   <SectionHeading eyebrow="المراحل" title={block.title} />
-                  <p className="note">{block.note}</p>
+                  <p className="note mb-6">{block.note}</p>
                   <ul className="steps-list">
                     {block.items.map((item, index) => (
                       <li key={index}>
@@ -144,7 +163,9 @@ export default async function ServicePage({
             return (
               <section key={blockIndex} className="section section-muted">
                 <div className="container">
-                  <div className="quote">{block.text}</div>
+                  <Reveal>
+                    <div className="quote">{block.text}</div>
+                  </Reveal>
                 </div>
               </section>
             );
@@ -155,10 +176,17 @@ export default async function ServicePage({
 
       <section className="section">
         <div className="container">
-          <div className="cta">
-            <h2>ابدأ بالحوار الأول: قرار أو أولوية أو مسار جاهزية واضح.</h2>
-            <ButtonLink href="/contact">اطلب جلسة تشخيصية</ButtonLink>
-          </div>
+          <Reveal>
+            <div className="cta">
+              <div>
+                <h2>ابدأ بالحوار الأول: قرار أو أولوية أو مسار جاهزية واضح.</h2>
+                <p>شاركنا مرحلة شركتك وسنتحول إلى نقطة بداية عملية.</p>
+              </div>
+              <ButtonLink href="/contact" icon="arrow-left">
+                اطلب جلسة تشخيصية
+              </ButtonLink>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

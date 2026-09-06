@@ -15,15 +15,21 @@ import {
   ctas,
 } from "@/lib/content";
 import { Section, SectionHeading, ButtonLink, Chip } from "@/components/ui";
+import { Icon } from "@/components/Icon";
+import { Reveal } from "@/components/Reveal";
+
+const pillarIcons = ["target", "gear", "layers", "trend"] as const;
+const audienceIcons = ["user", "trend", "shield", "handshake"] as const;
 
 export default function Home() {
   return (
     <>
       {/* 1 — الوعد */}
-      <section className="hero">
+      <section className="hero" id="top">
+        <span className="hero-ring" aria-hidden="true" />
         <div className="container">
           <div className="hero-grid">
-            <div>
+            <Reveal>
               <span className="eyebrow">
                 {site.tagline} — {site.activity}
               </span>
@@ -32,21 +38,52 @@ export default function Home() {
               </h1>
               <p className="lead">{site.descriptor}</p>
               <div className="actions">
-                <ButtonLink href="/contact">{ctas.consultation}</ButtonLink>
+                <ButtonLink href="/contact" icon="arrow-left">
+                  {ctas.consultation}
+                </ButtonLink>
                 <ButtonLink href="/#approach" variant="secondary">
                   {ctas.methodology}
                 </ButtonLink>
               </div>
-            </div>
-            <aside className="hero-card">
-              <h3 style={{ color: "#fff" }}>من التشخيص إلى التنفيذ</h3>
-              <ul className="hero-card-list">
-                {supportElements.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </aside>
+              <span className="hero-cue">
+                <span className="line" aria-hidden="true" />
+                اكتشف منهجنا
+              </span>
+            </Reveal>
+            <Reveal delay={180}>
+              <aside className="hero-card">
+                <h3>
+                  <Icon name="compass" size={20} />
+                  من التشخيص إلى التنفيذ
+                </h3>
+                <ul className="hero-card-list">
+                  {supportElements.map((item) => (
+                    <li key={item}>
+                      <Icon name="check" size={16} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            </Reveal>
           </div>
+
+          <Reveal delay={240}>
+            <div className="stat-strip">
+              <div className="stat">
+                <strong>04</strong>
+                <span>وحدات خدمية واضحة، كلٌّ يبيع نتيجة مختلفة</span>
+              </div>
+              <div className="stat">
+                <strong>06</strong>
+                <span>قطاعات متخصصة نخدمها بعمق — لا كل القطاعات</span>
+              </div>
+              <div className="stat">
+                <strong>01</strong>
+                <span>منهج واحد لا ينقطع من التشخيص إلى الصفقة</span>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -57,13 +94,15 @@ export default function Home() {
           title="قطاعات نخدمها بعمق — لا كل القطاعات"
           description="نركز في ستة قطاعات محددة لنصل فيها إلى عمق حقيقي في التشخيص والحل."
         />
-        <p style={{ display: "flex", flexWrap: "wrap", gap: ".6rem" }}>
-          {industries.map((industry) => (
-            <Chip key={industry} gold>
-              {industry}
-            </Chip>
-          ))}
-        </p>
+        <Reveal>
+          <div className="flex wrap gap-sm">
+            {industries.map((industry) => (
+              <Chip key={industry} gold>
+                {industry}
+              </Chip>
+            ))}
+          </div>
+        </Reveal>
       </Section>
 
       {/* 3 — المنهج: أربع ركائز */}
@@ -75,11 +114,16 @@ export default function Home() {
         />
         <div className="grid-4">
           {pillars.map((pillar, index) => (
-            <div className="card" key={pillar.title}>
-              <span className="number">0{index + 1}</span>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.text}</p>
-            </div>
+            <Reveal key={pillar.title} delay={index * 90}>
+              <div className="card accent-top">
+                <span className="card-icon">
+                  <Icon name={pillarIcons[index]} size={22} />
+                </span>
+                <span className="number">0{index + 1}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -92,14 +136,19 @@ export default function Home() {
           description="نبدأ من موضع الشركة الحالي وما يحتاجه قرار المالك أو الإدارة الآن، ثم نصمم مساراً عملياً يناسب المرحلة."
         />
         <div className="grid-4">
-          {audiences.map((audience) => (
-            <div className="card" key={audience.title}>
-              <span className="mini-label">الاحتياج</span>
-              <p style={{ marginBottom: "1rem" }}>{audience.need}</p>
-              <span className="mini-label">الخدمة الموجهة</span>
-              <p style={{ marginBottom: 0 }}>{audience.service}</p>
-              <h3 style={{ marginTop: "1rem", marginBottom: 0 }}>{audience.title}</h3>
-            </div>
+          {audiences.map((audience, index) => (
+            <Reveal key={audience.title} delay={index * 90}>
+              <div className="card">
+                <span className="card-icon">
+                  <Icon name={audienceIcons[index]} size={22} />
+                </span>
+                <h3>{audience.title}</h3>
+                <span className="mini-label">الاحتياج</span>
+                <p style={{ marginBottom: "1rem" }}>{audience.need}</p>
+                <span className="mini-label">الخدمة الموجهة</span>
+                <p style={{ marginBottom: 0 }}>{audience.service}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -112,15 +161,18 @@ export default function Home() {
           description="لا نبيع قائمة خدمات تقليدية. نربط كل تدخل بنتيجة قابلة للتفسير، وبما تتطلبه المرحلة التالية من جاهزية أو قرار."
         />
         <div className="grid-2">
-          {services.map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} className="card">
-              <span className="number">{service.number}</span>
-              <h3>{service.title}</h3>
-              <p>{service.promise}</p>
-              <p style={{ color: "#8a6d2f", fontWeight: 600, marginTop: "1rem", marginBottom: 0 }}>
-                استكشف الوحدة
-              </p>
-            </Link>
+          {services.map((service, index) => (
+            <Reveal key={service.slug} delay={index * 80}>
+              <Link href={`/services/${service.slug}`} className="card accent-top">
+                <span className="number">{service.number}</span>
+                <h3>{service.title}</h3>
+                <p>{service.promise}</p>
+                <p className="flex gap-sm text-gold mt-4" style={{ fontWeight: 600, fontSize: ".92rem" }}>
+                  استكشف الوحدة
+                  <Icon name="arrow-left" size={17} className="ico-arrow" />
+                </p>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -134,11 +186,13 @@ export default function Home() {
         />
         <div className="timeline">
           {journey.map((stage, index) => (
-            <div className="card" key={stage.title}>
-              <span className="number">0{index + 1}</span>
-              <h3>{stage.title}</h3>
-              <p>{stage.text}</p>
-            </div>
+            <Reveal key={stage.title} delay={index * 70}>
+              <div className="card accent-top">
+                <span className="step-index">0{index + 1}</span>
+                <h3>{stage.title}</h3>
+                <p>{stage.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -147,11 +201,16 @@ export default function Home() {
       <Section muted>
         <SectionHeading eyebrow="النبرة" title="لغة تنفيذية تعكس الثقة، لا الاستعراض" />
         <div className="grid-4">
-          {statements.map((statement) => (
-            <div className="card" key={statement.title}>
-              <h3>{statement.title}</h3>
-              <p>{statement.text}</p>
-            </div>
+          {statements.map((statement, index) => (
+            <Reveal key={statement.title} delay={index * 90}>
+              <div className="card">
+                <span className="card-icon">
+                  <Icon name={index % 2 === 0 ? "document" : "chart"} size={22} />
+                </span>
+                <h3>{statement.title}</h3>
+                <p>{statement.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -163,11 +222,14 @@ export default function Home() {
           title="لا تكتفي تقاريرنا بوصف ما حدث؛ بل توضح القرار المطلوب بعده"
         />
         <div className="grid-3">
-          {deliverables.map((item) => (
-            <div className="card" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
+          {deliverables.map((item, index) => (
+            <Reveal key={item.title} delay={index * 90}>
+              <div className="card accent-top">
+                <span className="number">0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -179,39 +241,41 @@ export default function Home() {
           title="الثقة والسرية جزء من المنتج"
           description={confidentialityRule}
         />
-        <p style={{ display: "flex", flexWrap: "wrap", gap: ".6rem", marginBottom: "1.5rem" }}>
-          {values.map((value) => (
-            <Chip key={value.title}>{value.title}</Chip>
-          ))}
-        </p>
-        <p className="lead">
-          دراسات الحالة لدينا تُنشر بقالب ثابت — دون كشف هوية العميل:
-        </p>
-        <p style={{ display: "flex", flexWrap: "wrap", gap: ".6rem" }}>
-          {caseStudyAxes.map((axis) => (
-            <Chip key={axis} gold>
-              {axis}
-            </Chip>
-          ))}
-        </p>
+        <Reveal>
+          <div className="flex wrap gap-sm" style={{ marginBottom: "1.75rem" }}>
+            {values.map((value) => (
+              <Chip key={value.title}>{value.title}</Chip>
+            ))}
+          </div>
+          <p className="lead">دراسات الحالة لدينا تُنشر بقالب ثابت — دون كشف هوية العميل:</p>
+          <div className="flex wrap gap-sm">
+            {caseStudyAxes.map((axis) => (
+              <Chip key={axis} gold>
+                {axis}
+              </Chip>
+            ))}
+          </div>
+        </Reveal>
       </Section>
 
       {/* 10 — الدعوة النهائية */}
       <Section>
-        <div className="cta">
-          <div>
-            <h2>{ctas.evaluate}</h2>
-            <p style={{ color: "#d9e2eb", marginBottom: 0 }}>
-              ابدأ بحوار أول يتحول إلى نقطة بداية عملية: قرار أو أولوية أو مسار جاهزية واضح.
-            </p>
+        <Reveal>
+          <div className="cta">
+            <div>
+              <h2>{ctas.evaluate}</h2>
+              <p>ابدأ بحوار أول يتحول إلى نقطة بداية عملية: قرار أو أولوية أو مسار جاهزية واضح.</p>
+            </div>
+            <div className="actions" style={{ marginTop: 0 }}>
+              <ButtonLink href="/contact" icon="arrow-left">
+                {ctas.consultation}
+              </ButtonLink>
+              <ButtonLink href="/services/investment-readiness" variant="secondary">
+                {ctas.invest}
+              </ButtonLink>
+            </div>
           </div>
-          <div className="actions" style={{ marginTop: 0 }}>
-            <ButtonLink href="/contact">{ctas.consultation}</ButtonLink>
-            <ButtonLink href="/services/investment-readiness" variant="secondary">
-              {ctas.invest}
-            </ButtonLink>
-          </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

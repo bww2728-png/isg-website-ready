@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { audienceStages } from "@/lib/content";
 import { validateLead, type LeadErrors } from "@/lib/form";
+import { Icon } from "@/components/Icon";
 
 type FormFields = {
   name: string;
@@ -69,7 +70,10 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="success-panel">
-        <h3>تم استلام طلبك</h3>
+        <div className="flex gap-sm" style={{ alignItems: "center", marginBottom: "0.5rem" }}>
+          <Icon name="check" size={22} />
+          <h3 style={{ margin: 0 }}>تم استلام طلبك</h3>
+        </div>
         <p>
           شاركنا المرحلة التي تمر بها الشركة، وسيتحوّل الحوار الأول إلى نقطة بداية عملية: قرار أو
           أولوية أو مسار جاهزية واضح.

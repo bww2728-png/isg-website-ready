@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { AXES, QUESTIONS, evaluate, type Answers } from "@/lib/assessment";
 import { ButtonLink } from "@/components/ui";
+import { Icon } from "@/components/Icon";
 import { ctas } from "@/lib/content";
 
 type View = { kind: "intro" } | { kind: "quiz"; index: number } | { kind: "result" };
@@ -39,12 +40,15 @@ export default function SelfAssessment() {
   if (view.kind === "intro") {
     return (
       <div className="card" style={{ padding: "2rem" }}>
+        <div className="card-icon">
+          <Icon name="chart" size={22} />
+        </div>
         <h2 style={{ fontSize: "1.6rem" }}>تقييم ذاتي سريع</h2>
         <p className="lead">
           أجب على 15 سؤالاً موزعة على 4 محاور، واحصل فوراً على قراءة أولية لموضع شركتك
           وتوصية بالخطوة الأعلى أثراً. يستغرق التقييم نحو 4 دقائق.
         </p>
-        <ul className="list-check">
+        <ul className="list-check" style={{ marginBottom: "1.5rem" }}>
           {AXES.map((axis) => (
             <li key={axis.id}>{axis.title}</li>
           ))}
@@ -53,9 +57,11 @@ export default function SelfAssessment() {
           أداة تشخيص أولية تستند إلى إجاباتك فقط، ولا تمثل ضماناً لنتائج محددة. إجاباتك
           لا تُحفظ ولا تُرسل؛ يعمل التقييم كلياً داخل متصفحك.
         </p>
-        <button type="button" className="button button-primary" onClick={start}>
-          ابدأ التقييم
-        </button>
+        <div className="actions">
+          <button type="button" className="button button-primary" onClick={start}>
+            ابدأ التقييم
+          </button>
+        </div>
       </div>
     );
   }
@@ -71,9 +77,9 @@ export default function SelfAssessment() {
         <div className="tool-progress" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} aria-label="تقدم التقييم">
           <span style={{ width: `${progress}%` }} />
         </div>
-        <p style={{ marginTop: "1rem", marginBottom: 0 }}>
+        <p className="flex flex-between" style={{ marginTop: "1.1rem", marginBottom: 0 }}>
           <span className="pill">{AXES.find((axis) => axis.id === question.axis)?.title}</span>
-          <span className="note" style={{ marginInlineStart: ".6rem" }}>
+          <span className="note">
             السؤال {view.index + 1} من {QUESTIONS.length}
           </span>
         </p>
@@ -90,7 +96,7 @@ export default function SelfAssessment() {
               className="tool-option"
               onClick={() => select(question.id, index)}
             >
-              {option.label}
+              <span>{option.label}</span>
             </button>
           ))}
         </div>
@@ -116,22 +122,27 @@ export default function SelfAssessment() {
 
   return (
     <div className="card" style={{ padding: "2rem" }}>
-      <span className="eyebrow">النتيجة</span>
-      <h2 style={{ fontSize: "1.8rem" }}>{result.band.title}</h2>
-      <p className="lead">{result.band.summary}</p>
-
-      <div className="tool-progress" role="progressbar" aria-valuenow={result.totalPercent} aria-valuemin={0} aria-valuemax={100} aria-label="النسبة الإجمالية للتقييم">
-        <span style={{ width: `${result.totalPercent}%` }} />
+      <div className="flex flex-between" style={{ alignItems: "center" }}>
+        <div>
+          <span className="eyebrow">النتيجة</span>
+          <h2 style={{ fontSize: "1.8rem", margin: "1rem 0 0.5rem" }}>{result.band.title}</h2>
+          <p className="lead" style={{ maxWidth: 520 }}>{result.band.summary}</p>
+        </div>
+        <div
+          className="donut"
+          style={{ "--p": String(result.totalPercent) } as React.CSSProperties}
+          role="img"
+          aria-label={`النسبة الإجمالية للتقييم ${result.totalPercent}%`}
+        >
+          <b>{result.totalPercent}%</b>
+        </div>
       </div>
-      <p className="note" style={{ marginTop: ".5rem" }}>
-        النسبة الإجمالية: {result.totalPercent}%
-      </p>
 
-      <h3 style={{ marginTop: "1.5rem", fontSize: "1.1rem" }}>القراءة حسب المحاور</h3>
+      <h3 style={{ marginTop: "1.75rem", fontSize: "1.1rem" }}>القراءة حسب المحاور</h3>
       <div style={{ display: "grid", gap: ".9rem", marginTop: ".75rem" }}>
         {result.axisResults.map((axis) => (
           <div key={axis.axisId}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: ".9rem" }}>
+            <div className="flex flex-between" style={{ fontSize: ".9rem" }}>
               <span>{axis.title}</span>
               <span className="note">{axis.answered > 0 ? `${axis.percent}%` : "لم يُجب"}</span>
             </div>
@@ -142,8 +153,8 @@ export default function SelfAssessment() {
         ))}
       </div>
 
-      <h3 style={{ marginTop: "1.5rem", fontSize: "1.1rem" }}>التوصيات</h3>
-      <div style={{ display: "grid", gap: ".75rem", marginTop: ".75rem" }}>
+      <h3 style={{ marginTop: "1.75rem", fontSize: "1.1rem" }}>التوصيات</h3>
+      <div style={{ display: "grid", gap: ".9rem", marginTop: ".75rem" }}>
         {result.band.recommendations.map((recommendation) => (
           <div key={recommendation.title}>
             <span className="mini-label">{recommendation.title}</span>

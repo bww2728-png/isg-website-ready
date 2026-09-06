@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ButtonLink, Chip, Section, SectionHeading } from "@/components/ui";
+import { Icon } from "@/components/Icon";
+import { Reveal } from "@/components/Reveal";
 import { ctas, insightsPlan } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -28,37 +30,58 @@ export default function InsightsPage() {
         <div className="container">
           <span className="eyebrow">المحتوى</span>
           <h1>الرؤى والمحتوى</h1>
-          <p>{insightsDescription}</p>
+          <p className="lead">{insightsDescription}</p>
         </div>
       </div>
 
       <Section>
-        <SectionHeading eyebrow="خطة الانطلاق" title="12 قطعة تبني الثقة تدريجياً دون تكرار" description="خطة المحتوى لأول 30 يوماً وفق أربعة محاور أسبوعية." />
+        <SectionHeading
+          eyebrow="خطة الانطلاق"
+          title="12 قطعة تبني الثقة تدريجياً دون تكرار"
+          description="خطة المحتوى لأول 30 يوماً وفق أربعة محاور أسبوعية."
+        />
         <p className="note">المقالات في مرحلة الإعداد والنشر التدريجي؛ يُحدَّث هذا الفهرس مع كل نشر.</p>
-        {weekly.map((group) => (
-          <div key={group.week} className="mt-8">
-            <h3>{group.week}</h3>
-            <Chip>{group.axis}</Chip>
-            <div className="grid-3">
-              {group.items.map((article) => (
-                <div className="card" key={article.title}>
-                  <h4>{article.title}</h4>
-                </div>
-              ))}
+        {weekly.map((group, groupIndex) => (
+          <Reveal key={group.week} delay={groupIndex * 60}>
+            <div className="mt-8" style={{ marginBottom: "2.5rem" }}>
+              <div className="flex" style={{ alignItems: "center", gap: "0.9rem", marginBottom: "1.25rem" }}>
+                <h3 style={{ fontSize: "1.4rem" }}>{group.week}</h3>
+                <span aria-hidden="true" style={{ flex: 1, height: 1, background: "var(--line)" }} />
+                <Chip>{group.axis}</Chip>
+              </div>
+              <div className="grid-3">
+                {group.items.map((article) => (
+                  <div className="card accent-top" key={article.title}>
+                    <span className="card-icon">
+                      <Icon name="document" size={22} />
+                    </span>
+                    <h4 style={{ fontSize: "1.05rem" }}>{article.title}</h4>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         ))}
       </Section>
 
       <Section muted>
-        <div className="quote">{insightsDescription}</div>
+        <Reveal>
+          <div className="quote">{insightsDescription}</div>
+        </Reveal>
       </Section>
 
       <Section>
-        <div className="cta">
-          <h2>قبل أن تنشر مقالتك الأولى، انطلق من تشخيص واقعك.</h2>
-          <ButtonLink href="/contact">{ctas.diagnostic}</ButtonLink>
-        </div>
+        <Reveal>
+          <div className="cta">
+            <div>
+              <h2>قبل أن تنشر مقالتك الأولى، انطلق من تشخيص واقعك.</h2>
+              <p>ابدأ بقراءة دقيقة لموضع شركتك ثم ابنِ المحتوى من الواقع.</p>
+            </div>
+            <ButtonLink href="/contact" icon="arrow-left">
+              {ctas.diagnostic}
+            </ButtonLink>
+          </div>
+        </Reveal>
       </Section>
     </>
   );
