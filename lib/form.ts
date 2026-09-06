@@ -16,6 +16,8 @@ export type LeadInput = {
 export type LeadErrors = Partial<Record<"name" | "email" | "stage" | "consent" | "challenge", string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const URL_RE = /(https?:\/\/|www\.)/i;
+const MAX_NAME = 100;
 const MAX_CHALLENGE = 500;
 
 export function validateLead(
@@ -24,8 +26,8 @@ export function validateLead(
   const errors: LeadErrors = {};
   const input = (raw ?? {}) as Partial<LeadInput> & Record<string, unknown>;
 
-  const name = typeof input.name === "string" ? input.name.trim() : "";
-  const email = typeof input.email === "string" ? input.email.trim() : "";
+  const name = typeof input.name === "string" ? input.name.trim().slice(0, MAX_NAME) : "";
+  const email = typeof input.email === "string" ? input.email.trim().slice(0, 254) : "";
   const stage = typeof input.stage === "string" ? input.stage : "";
   const challenge =
     typeof input.challenge === "string" ? input.challenge.trim().slice(0, MAX_CHALLENGE) : "";
@@ -34,6 +36,10 @@ export function validateLead(
 
   if (company !== "") {
     // حقل خفي للروبوتات: يجب أن يبقى فارغاً.
+    return { ok: false, errors: { name: "يرجى المحاولة مرة أخرى." } };
+  }
+  if (URL_RE.test(name) || URL_RE.test(challenge)) {
+    // رفض النصوص التي تحتوي روابط لمنع البريد المزعج.
     return { ok: false, errors: { name: "يرجى المحاولة مرة أخرى." } };
   }
   if (name.length < 3) {

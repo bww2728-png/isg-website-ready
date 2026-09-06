@@ -13,7 +13,8 @@ export type IconName =
   | "target"
   | "trend"
   | "handshake"
-  | "document";
+  | "document"
+  | "phone";
 
 const icons: Record<IconName, React.ReactNode> = {
   check: <path d="M20 6 9 17l-5-5" />,
@@ -93,6 +94,11 @@ const icons: Record<IconName, React.ReactNode> = {
       <path d="M7 3h7l5 5v13H7z" />
       <path d="M14 3v5h5" />
       <path d="M10 13h5m-5 4h5" />
+    </>
+  ),
+  phone: (
+    <>
+      <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
     </>
   ),
 };

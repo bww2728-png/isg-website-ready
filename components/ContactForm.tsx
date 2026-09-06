@@ -69,7 +69,7 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="success-panel">
+      <div className="success-panel" role="status">
         <div className="flex gap-sm" style={{ alignItems: "center", marginBottom: "0.5rem" }}>
           <Icon name="check" size={22} />
           <h3 style={{ margin: 0 }}>تم استلام طلبك</h3>
@@ -93,10 +93,15 @@ export default function ContactForm() {
           type="text"
           value={fields.name}
           required
+          autoComplete="name"
+          dir="auto"
           minLength={3}
+          aria-required="true"
+          aria-invalid={errors.name ? "true" : "false"}
+          aria-describedby={errors.name ? "contact-name-error" : undefined}
           onChange={(event) => setField("name", event.target.value)}
         />
-        {errors.name ? <p className="form-error">{errors.name}</p> : null}
+        {errors.name ? <p className="form-error" id="contact-name-error">{errors.name}</p> : null}
       </div>
 
       <div className={`field${errors.email ? " invalid" : ""}`}>
@@ -105,10 +110,16 @@ export default function ContactForm() {
           id="contact-email"
           name="email"
           type="email"
+          inputMode="email"
+          autoComplete="email"
+          dir="ltr"
           value={fields.email}
+          aria-required="true"
+          aria-invalid={errors.email ? "true" : "false"}
+          aria-describedby={errors.email ? "contact-email-error" : undefined}
           onChange={(event) => setField("email", event.target.value)}
         />
-        {errors.email ? <p className="form-error">{errors.email}</p> : null}
+        {errors.email ? <p className="form-error" id="contact-email-error">{errors.email}</p> : null}
       </div>
 
       <div className={`field${errors.stage ? " invalid" : ""}`}>
@@ -117,6 +128,9 @@ export default function ContactForm() {
           id="contact-stage"
           name="stage"
           value={fields.stage}
+          aria-required="true"
+          aria-invalid={errors.stage ? "true" : "false"}
+          aria-describedby={errors.stage ? "contact-stage-error" : undefined}
           onChange={(event) => setField("stage", event.target.value)}
         >
           <option value="">اختر المرحلة الأنسب</option>
@@ -126,7 +140,7 @@ export default function ContactForm() {
             </option>
           ))}
         </select>
-        {errors.stage ? <p className="form-error">{errors.stage}</p> : null}
+        {errors.stage ? <p className="form-error" id="contact-stage-error">{errors.stage}</p> : null}
       </div>
 
       <div className="field">
@@ -136,8 +150,12 @@ export default function ContactForm() {
           name="challenge"
           value={fields.challenge}
           maxLength={500}
+          dir="auto"
           onChange={(event) => setField("challenge", event.target.value)}
         />
+        <span className="char-count" aria-live="polite">
+          {fields.challenge.length}/500
+        </span>
       </div>
 
       <div

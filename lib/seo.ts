@@ -53,3 +53,31 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
     })),
   };
 }
+
+export function serviceJsonLd(arg: {
+  slug: string;
+  title: string;
+  promise: string;
+  broader: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: arg.title,
+    description: arg.broader || arg.promise,
+    url: `${baseUrl()}/services/${arg.slug}`,
+    serviceType: arg.title,
+    provider: {
+      "@type": "Organization",
+      name: site.nameAr,
+      url: baseUrl(),
+    },
+    areaServed: { "@type": "Country", name: "السعودية" },
+    offers: {
+      "@type": "Offer",
+      url: `${baseUrl()}/services/${arg.slug}`,
+      availability: "https://schema.org/InStock",
+      priceCurrency: "SAR",
+    },
+  };
+}

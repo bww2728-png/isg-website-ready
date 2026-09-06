@@ -375,6 +375,15 @@ html:has(> body) { background: var(--surface); }
 .section-heading.center .eyebrow:after { order: 2; }
 h2 + .section-heading p, .section-heading p.lead { color: var(--muted); }
 
+/* ---------- Contact layout ---------- */
+.contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 2.5rem; align-items: start; }
+.contact-paths { display: grid; gap: 0.85rem; }
+.contact-paths .card { padding: 1.1rem 1.3rem; }
+.contact-card { padding: 1.8rem; }
+@media (max-width: 850px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
 /* ---------- Grids & Cards ---------- */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
@@ -566,6 +575,7 @@ h2 + .section-heading p, .section-heading p.lead { color: var(--muted); }
   background: #fffdf8;
 }
 .field textarea { min-height: 130px; resize: vertical; }
+.char-count { font-size: 0.72rem; color: var(--muted); text-align: end; }
 .check { display: flex; gap: 0.6rem; align-items: flex-start; color: var(--muted); font-size: 0.85rem; cursor: pointer; }
 .check input { accent-color: var(--gold-600); margin-top: 0.35rem; width: 16px; height: 16px; flex-shrink: 0; }
 .required { color: var(--danger); }

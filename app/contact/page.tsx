@@ -45,13 +45,13 @@ export default function ContactPage() {
       </div>
 
       <Section>
-        <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "2.5rem", alignItems: "start" }}>
+        <div className="contact-grid">
           <Reveal>
             <div>
               <SectionHeading eyebrow="البداية" title="مسارات للحوار الأول" />
-              <div style={{ display: "grid", gap: "0.85rem" }}>
+              <div className="contact-paths">
                 {pathways.map((path) => (
-                  <div className="card" key={path.title} style={{ padding: "1.1rem 1.3rem" }}>
+                  <div className="card" key={path.title}>
                     <span className="mini-label">{path.title}</span>
                     <p className="mt-2" style={{ marginBottom: 0 }}>{path.text}</p>
                   </div>
@@ -62,7 +62,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={140}>
-            <div className="card" style={{ padding: "1.8rem" }}>
+            <div className="card contact-card">
               <ContactForm />
             </div>
           </Reveal>
@@ -70,41 +70,47 @@ export default function ContactPage() {
       </Section>
 
       <Section muted>
-        <div className="container">
-          <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
-          <div className="grid-3">
-            <div className="card">
-              <span className="card-icon">
-                <Icon name="mail" size={22} />
-              </span>
-              <h3>البريد الإلكتروني</h3>
-              <p>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-              </p>
-            </div>
-            <div className="card">
-              <span className="card-icon">
-                <Icon name="pin" size={22} />
-              </span>
-              <h3>الموقع</h3>
-              <p>{site.city}</p>
-            </div>
-            <div className="card">
-              <span className="card-icon">
-                <Icon name="trend" size={22} />
-              </span>
-              <h3>LinkedIn</h3>
-              <p>
-                <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
-                  ISG Advisory
-                </a>
-              </p>
-            </div>
+        <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
+        <div className="grid-3">
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="mail" size={22} />
+            </span>
+            <h3>البريد الإلكتروني</h3>
+            <p>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
           </div>
-          <p className="note mt-8">
-            تُعالج بياناتك بحد أدنى لغرض الرد على طلبك فقط، وفق سياسة الخصوصية.
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="pin" size={22} />
+            </span>
+            <h3>الموقع</h3>
+            <p>{site.city}</p>
+          </div>
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="trend" size={22} />
+            </span>
+            <h3>LinkedIn</h3>
+            <p>
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
+                ISG Advisory
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div className="card" style={{ marginTop: "1.5rem", borderColor: "var(--line-strong)" }}>
+          <span className="mini-label">قنوات تواصل إضافية</span>
+          <p className="mt-2" style={{ marginBottom: 0 }}>
+            {site.phoneNote}
           </p>
         </div>
+
+        <p className="note mt-8">
+          تُعالج بياناتك بحد أدنى لغرض الرد على طلبك فقط، وفق سياسة الخصوصية.
+        </p>
       </Section>
     </>
   );

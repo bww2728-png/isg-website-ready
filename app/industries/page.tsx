@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import { Section, SectionHeading, ButtonLink, Chip } from "@/components/ui";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
-import { caseStudyAxes, confidentialityRule, ctas, industries } from "@/lib/content";
+import {
+  caseStudyAxes,
+  caseStudyDescriptions,
+  confidentialityRule,
+  ctas,
+  industries,
+  industryDescriptions,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "القطاعات",
@@ -36,6 +43,9 @@ export default function IndustriesPage() {
                   <Icon name={industryIcons[index]} size={22} />
                 </span>
                 <h3>{industry}</h3>
+                <p className="mt-2" style={{ marginBottom: 0 }}>
+                  {industryDescriptions[index]}
+                </p>
                 <Chip className="mt-4">قطاع متخصص</Chip>
               </div>
             </Reveal>
@@ -54,8 +64,8 @@ export default function IndustriesPage() {
             <Reveal key={axis} delay={index * 80}>
               <div className="card">
                 <span className="mini-label">{axis}</span>
-                <p className="lead mt-2" style={{ fontWeight: 600, color: "var(--navy-800)" }}>
-                  {axis}
+                <p className="mt-2" style={{ marginBottom: 0, color: "var(--muted)" }}>
+                  {caseStudyDescriptions[index]}
                 </p>
               </div>
             </Reveal>

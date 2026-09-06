@@ -52,10 +52,16 @@ export default function InsightsPage() {
               <div className="grid-3">
                 {group.items.map((article) => (
                   <div className="card accent-top" key={article.title}>
-                    <span className="card-icon">
-                      <Icon name="document" size={22} />
-                    </span>
+                    <div className="flex" style={{ justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem" }}>
+                      <span className="card-icon">
+                        <Icon name="document" size={22} />
+                      </span>
+                      <Chip>قيد الإعداد</Chip>
+                    </div>
                     <h4 style={{ fontSize: "1.05rem" }}>{article.title}</h4>
+                    <p className="note mt-2" style={{ marginBottom: 0 }}>
+                      سيتاح المقال هنا عند النشر.
+                    </p>
                   </div>
                 ))}
               </div>

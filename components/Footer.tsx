@@ -45,9 +45,13 @@ export function Footer() {
             </p>
             <p className="flex gap-sm" style={{ margin: 0 }}>
               <Icon name="trend" size={17} />
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
                 LinkedIn — ISG Advisory
               </a>
+            </p>
+            <p className="flex gap-sm" style={{ margin: 0 }}>
+              <Icon name="phone" size={17} />
+              <span className="plain">{site.phoneNote}</span>
             </p>
             <p style={{ margin: "1rem 0 0" }}>شريك التنفيذ: العربي الاستشاري</p>
           </div>

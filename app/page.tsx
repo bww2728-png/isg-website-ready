@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   site,
   supportElements,
@@ -20,6 +21,18 @@ import { Reveal } from "@/components/Reveal";
 
 const pillarIcons = ["target", "gear", "layers", "trend"] as const;
 const audienceIcons = ["user", "trend", "shield", "handshake"] as const;
+
+export const metadata: Metadata = {
+  title: "استشارات مالية وتجارية — تشخيص، تحسين ربحية، جاهزية استثمارية",
+  description: site.coreMessage,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "ISG — بوابة الحلول المبتكرة",
+    description: site.coreMessage,
+    url: "/",
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (

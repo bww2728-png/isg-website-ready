@@ -5,7 +5,7 @@ import { SectionHeading, ButtonLink } from "@/components/ui";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { services } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -40,6 +40,14 @@ export default async function ServicePage({
           { name: "الخدمات", path: "/services" },
           { name: service.title, path: `/services/${slug}` },
         ])}
+      />
+      <JsonLd
+        data={serviceJsonLd({
+          slug: service.slug,
+          title: service.title,
+          promise: service.promise,
+          broader: service.broader,
+        })}
       />
 
       <div className="page-hero">
