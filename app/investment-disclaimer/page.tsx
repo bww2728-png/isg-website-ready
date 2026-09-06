@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui";
-import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "بيان الإخلاء الاستثماري",
@@ -34,10 +33,6 @@ const sections: { title: string; text: string | { items: string[] } }[] = [
   },
 ];
 
-const contactText = "لأي استفسار:";
-
-const MAILTO = `mailto:${site.email}`;
-
 export default function InvestmentDisclaimerPage() {
   return (
     <>
@@ -66,13 +61,7 @@ export default function InvestmentDisclaimerPage() {
 
       <Section muted>
         <h2>تواصل</h2>
-        <p>
-          {contactText}{" "}
-          <a href={MAILTO} className="link">
-            {site.email}
-          </a>
-          {"."}
-        </p>
+        <p>لأي استفسار، يرجى استخدام نموذج التواصل في صفحة تواصل معنا.</p>
       </Section>
     </>
   );

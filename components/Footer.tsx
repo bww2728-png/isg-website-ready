@@ -36,14 +36,6 @@ export function Footer() {
             <h3>تواصل</h3>
             <span className="h-rule" />
             <p className="flex gap-sm" style={{ margin: 0 }}>
-              <Icon name="mail" size={17} />
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </p>
-            <p className="flex gap-sm" style={{ margin: 0 }}>
-              <Icon name="pin" size={17} />
-              <span className="plain">{site.city}</span>
-            </p>
-            <p className="flex gap-sm" style={{ margin: 0 }}>
               <Icon name="trend" size={17} />
               <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
                 LinkedIn — ISG Advisory

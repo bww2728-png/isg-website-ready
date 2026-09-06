@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui";
-import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "سياسة الخصوصية",
@@ -26,7 +25,7 @@ const sections: { title: string; text: string }[] = [
   },
   {
     title: "حقوقك",
-    text: "الوصول والتصحيح والحذف وسحب الموافقة عبر البريد",
+    text: "الوصول والتصحيح والحذف وسحب الموافقة عبر نموذج التواصل.",
   },
   {
     title: "الأمان والمشاركة",
@@ -36,8 +35,6 @@ const sections: { title: string; text: string }[] = [
 
 const note =
   "هذه الصياغة أولية للعرض، وتحتاج إلى مراجعة واعتماد من مستشار قانوني مؤهل قبل النشر النهائي لضمان التوافق الكامل مع نظام حماية البيانات الشخصية السعودي (PDPL) واللوائح التنفيذية.";
-
-const MAILTO = `mailto:${site.email}`;
 
 export default function PrivacyPolicyPage() {
   return (
@@ -53,17 +50,7 @@ export default function PrivacyPolicyPage() {
       {sections.map((section) => (
         <Section key={section.title}>
           <h2>{section.title}</h2>
-          {section.title === "حقوقك" ? (
-            <p>
-              {section.text}{" "}
-              <a href={MAILTO} className="link">
-                {site.email}
-              </a>
-              {"."}
-            </p>
-          ) : (
-            <p>{section.text}</p>
-          )}
+          <p>{section.text}</p>
         </Section>
       ))}
 

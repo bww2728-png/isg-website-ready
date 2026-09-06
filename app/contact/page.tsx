@@ -71,23 +71,7 @@ export default function ContactPage() {
 
       <Section muted>
         <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
-        <div className="grid-3">
-          <div className="card">
-            <span className="card-icon">
-              <Icon name="mail" size={22} />
-            </span>
-            <h3>البريد الإلكتروني</h3>
-            <p>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </p>
-          </div>
-          <div className="card">
-            <span className="card-icon">
-              <Icon name="pin" size={22} />
-            </span>
-            <h3>الموقع</h3>
-            <p>{site.city}</p>
-          </div>
+        <div className="grid-2">
           <div className="card">
             <span className="card-icon">
               <Icon name="trend" size={22} />
@@ -99,15 +83,14 @@ export default function ContactPage() {
               </a>
             </p>
           </div>
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="phone" size={22} />
+            </span>
+            <h3>قنوات التواصل</h3>
+            <p>{site.phoneNote}</p>
+          </div>
         </div>
-
-        <div className="card" style={{ marginTop: "1.5rem", borderColor: "var(--line-strong)" }}>
-          <span className="mini-label">قنوات تواصل إضافية</span>
-          <p className="mt-2" style={{ marginBottom: 0 }}>
-            {site.phoneNote}
-          </p>
-        </div>
-
         <p className="note mt-8">
           تُعالج بياناتك بحد أدنى لغرض الرد على طلبك فقط، وفق سياسة الخصوصية.
         </p>

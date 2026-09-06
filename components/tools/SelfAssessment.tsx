@@ -122,7 +122,7 @@ export default function SelfAssessment() {
 
   return (
     <div className="card" style={{ padding: "2rem" }}>
-      <div className="flex flex-between" style={{ alignItems: "center" }}>
+      <div className="flex flex-between tool-result-head" style={{ alignItems: "center" }}>
         <div>
           <span className="eyebrow">النتيجة</span>
           <h2 style={{ fontSize: "1.8rem", margin: "1rem 0 0.5rem" }}>{result.band.title}</h2>
