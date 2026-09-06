@@ -1,0 +1,75 @@
+import type { Metadata } from "next";
+import { Section } from "@/components/ui";
+import { site } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "سياسة الخصوصية",
+  description: "كيف نجمع بياناتك ونستخدمها ونحميها وفق مبادئ نظام حماية البيانات الشخصية.",
+};
+
+const sections: { title: string; text: string }[] = [
+  {
+    title: "البيانات التي نجمعها",
+    text: "الاسم الكامل، البريد الإلكتروني، مرحلة الشركة، ونبذة التحدي (اختيارية) عند استخدام نموذج التواصل. لا نجمع بيانات تلقائية إضافية.",
+  },
+  {
+    title: "غرض المعالجة",
+    text: "الرد على الطلب وإدارة الحوار الأول وتحويله إلى خطوة عملية. لا نستخدم البيانات لأغراض تسويقية إلا بموافقة منفصلة.",
+  },
+  {
+    title: "أساس المعالجة",
+    text: "موافقتك الصريحة عند الإرسال، وتنفيذ طلبك.",
+  },
+  {
+    title: "الاحتفاظ والحذف",
+    text: "نحتفظ بالبيانات للمدة اللازمة لغرض الرد، وتستطيع طلب الحذف في أي وقت.",
+  },
+  {
+    title: "حقوقك",
+    text: "الوصول والتصحيح والحذف وسحب الموافقة عبر البريد",
+  },
+  {
+    title: "الأمان والمشاركة",
+    text: "لا نشارك بياناتك مع أطراف ثالثة دون غرض تشغيلي مبرر، والموقع يستخدم تشفير النقل TLS.",
+  },
+];
+
+const note =
+  "هذه الصياغة أولية للعرض، وتحتاج إلى مراجعة واعتماد من مستشار قانوني مؤهل قبل النشر النهائي لضمان التوافق الكامل مع نظام حماية البيانات الشخصية السعودي (PDPL) واللوائح التنفيذية.";
+
+const MAILTO = `mailto:${site.email}`;
+
+export default function PrivacyPolicyPage() {
+  return (
+    <>
+      <div className="page-hero">
+        <div className="container">
+          <span className="eyebrow">الامتثال</span>
+          <h1>سياسة الخصوصية</h1>
+          <p>تتعلق هذه السياسة بنموذج التواصل وبيانات الزوار في موقع ISG.</p>
+        </div>
+      </div>
+
+      {sections.map((section) => (
+        <Section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.title === "حقوقك" ? (
+            <p>
+              {section.text}{" "}
+              <a href={MAILTO} className="link">
+                {site.email}
+              </a>
+              {"."}
+            </p>
+          ) : (
+            <p>{section.text}</p>
+          )}
+        </Section>
+      ))}
+
+      <Section muted>
+        <p className="note">{note}</p>
+      </Section>
+    </>
+  );
+}
