@@ -101,12 +101,6 @@ export default function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeading eyebrow="الشريك المنفذ" title="العربي الاستشاري" />
-        <p className="lead">{site.partner}</p>
-        <p className="note">الشريك التنفيذي المتخصص لإدارة وتنفيذ المشروع ومتابعة تقديم الأعمال.</p>
-      </Section>
-
-      <Section>
         <Reveal>
           <div className="cta">
             <div>

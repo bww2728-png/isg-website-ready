@@ -19,14 +19,11 @@ export const site = {
   coreMessage: "نحوّل التحديات والبيانات إلى قرارات، قدرات، ونمو قابل للاستثمار.",
   heroTitle: ["نبني شركات أقوى", "ونجهزها للنمو والاستثمار."],
   finalPromise: "نبني شركات أقوى. ونجهز فرصاً أكثر احترافية.",
-  email: "info@isg-advisory.com",
-  city: "الرياض، المملكة العربية السعودية",
   linkedin: "https://www.linkedin.com/company/isg-advisory",
   phoneNote:
     "رقم الهاتف وبيانات قنوات التواصل الإضافية تُضاف فور توفرها من الجهة المعتمدة.",
   footerTagline: "بوابة الحلول المبتكرة — Business & Financial Advisory",
   copyright: "© ISG 2026 جميع الحقوق محفوظة.",
-  partner: "العربي الاستشاري — المتخصص في إدارة وتنفيذ المشروع ومتابعة تقديم الأعمال.",
 } as const;
 
 export const navLinks = [

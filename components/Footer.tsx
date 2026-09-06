@@ -45,7 +45,6 @@ export function Footer() {
               <Icon name="phone" size={17} />
               <span className="plain">{site.phoneNote}</span>
             </p>
-            <p style={{ margin: "1rem 0 0" }}>شريك التنفيذ: العربي الاستشاري</p>
           </div>
         </div>
         <div className="footer-bottom">
