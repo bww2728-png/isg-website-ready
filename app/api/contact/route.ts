@@ -1,5 +1,6 @@
 import { validateLead } from "@/lib/form";
 import { sendContactEmail } from "@/lib/email";
+import { saveLead } from "@/lib/leads";
 
 type Bucket = { count: number; resetAt: number };
 
@@ -59,6 +60,14 @@ export async function POST(request: Request) {
     );
   }
 
+  const saved = await saveLead({
+    name: result.data.name,
+    email: result.data.email,
+    stage: result.data.stage,
+    challenge: result.data.challenge,
+    source: "contact-form",
+  });
+
   const emailResult = await sendContactEmail({
     name: result.data.name,
     email: result.data.email,
@@ -71,7 +80,7 @@ export async function POST(request: Request) {
   }
 
   return Response.json(
-    { ok: true, message: "تم استلام طلبك بنجاح." },
+    { ok: true, message: "تم استلام طلبك بنجاح.", referenceId: saved },
     { status: 200, headers: { "Cache-Control": "no-store" } },
   );
 }
