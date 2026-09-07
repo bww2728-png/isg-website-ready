@@ -71,7 +71,7 @@ export default function ContactPage() {
 
       <Section muted>
         <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
-        <div className="grid-2">
+        <div className="grid-3">
           <div className="card">
             <span className="card-icon">
               <Icon name="trend" size={22} />
@@ -81,6 +81,15 @@ export default function ContactPage() {
               <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
                 ISG Advisory
               </a>
+            </p>
+          </div>
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="mail" size={22} />
+            </span>
+            <h3>البريد الإلكتروني</h3>
+            <p>
+              <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
             </p>
           </div>
           <div className="card">
