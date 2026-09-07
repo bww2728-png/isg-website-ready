@@ -8,7 +8,13 @@ declare global {
 
 function createPool(): Pool | undefined {
   if (!connectionString) return undefined;
-  return new Pool({ connectionString, max: 5, connectionTimeoutMillis: 5000, idleTimeoutMillis: 30_000 });
+  return new Pool({
+    connectionString,
+    max: 5,
+    connectionTimeoutMillis: 5000,
+    idleTimeoutMillis: 30_000,
+    ssl: { rejectUnauthorized: false },
+  });
 }
 
 /**
