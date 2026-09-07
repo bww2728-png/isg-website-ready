@@ -483,6 +483,24 @@ h2 + .section-heading p, .section-heading p.lead { color: var(--muted); }
   overflow: hidden;
 }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+.contact-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  text-align: start;
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
+}
+.contact-card-link h3 { margin: 0; }
+.contact-card-link p { margin: 0; color: var(--muted, inherit); }
+.contact-card-link .card-icon { margin-bottom: 0.35rem; }
+.contact-card-link:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--line-strong); }
 .card.accent-top:before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, var(--gold-500), var(--gold-300, var(--gold-soft))); opacity: 0; transition: opacity var(--t-med) var(--ease); }
 .card.accent-top:hover:before { opacity: 1; }
 .card .number {

@@ -72,49 +72,56 @@ export default function ContactPage() {
       <Section muted>
         <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
         <div className="grid-4">
-          <div className="card">
+          <a
+            className="contact-card-link"
+            href={site.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)"
+          >
             <span className="card-icon">
               <Icon name="trend" size={22} />
             </span>
             <h3>LinkedIn</h3>
-            <p>
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
-                ISG Advisory
-              </a>
-            </p>
-          </div>
-          <div className="card">
+            <p>ISG Advisory</p>
+          </a>
+          <a
+            className="contact-card-link"
+            href={`mailto:${site.contactEmail}`}
+            aria-label={`راسلنا عبر البريد ${site.contactEmail}`}
+          >
             <span className="card-icon">
               <Icon name="mail" size={22} />
             </span>
             <h3>البريد الإلكتروني</h3>
-            <p>
-              <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
-            </p>
-          </div>
-          <div className="card">
+            <p>{site.contactEmail}</p>
+          </a>
+          <a
+            className="contact-card-link"
+            href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("مرحباً، أود الاستفسار عن خدمات ISG Advisory.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="واتساب — ISG Advisory (يفتح في نافذة جديدة)"
+          >
             <span className="card-icon">
               <Icon name="whatsapp" size={22} />
             </span>
             <h3>واتساب</h3>
-            <p>
-              <a
-                href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("مرحباً، أود الاستفسار عن خدمات ISG Advisory.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="واتساب — ISG Advisory (يفتح في نافذة جديدة)"
-              >
-                تواصل عبر واتساب
-              </a>
-            </p>
-          </div>
-          <div className="card">
+            <p>تواصل عبر واتساب</p>
+          </a>
+          <a
+            className="contact-card-link"
+            href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("مرحباً، هذا رقم ISG الرئيسي للتواصل المباشر.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="رقم التواصل المباشر عبر واتساب (يفتح في نافذة جديدة)"
+          >
             <span className="card-icon">
               <Icon name="phone" size={22} />
             </span>
-            <h3>قنوات التواصل</h3>
-            <p>{site.phoneNote}</p>
-          </div>
+            <h3>رقم التواصل المباشر</h3>
+            <p dir="ltr">+966&nbsp;50&nbsp;281&nbsp;7792</p>
+          </a>
         </div>
         <p className="note mt-8">
           تُعالج بياناتك بحد أدنى لغرض الرد على طلبك فقط، وفق سياسة الخصوصية.
