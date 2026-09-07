@@ -71,7 +71,7 @@ export default function ContactPage() {
 
       <Section muted>
         <SectionHeading eyebrow="بيانات التواصل" title="تواصل مباشر" />
-        <div className="grid-3">
+        <div className="grid-4">
           <div className="card">
             <span className="card-icon">
               <Icon name="trend" size={22} />
@@ -90,6 +90,22 @@ export default function ContactPage() {
             <h3>البريد الإلكتروني</h3>
             <p>
               <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+            </p>
+          </div>
+          <div className="card">
+            <span className="card-icon">
+              <Icon name="whatsapp" size={22} />
+            </span>
+            <h3>واتساب</h3>
+            <p>
+              <a
+                href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("مرحباً، أود الاستفسار عن خدمات ISG Advisory.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="واتساب — ISG Advisory (يفتح في نافذة جديدة)"
+              >
+                تواصل عبر واتساب
+              </a>
             </p>
           </div>
           <div className="card">

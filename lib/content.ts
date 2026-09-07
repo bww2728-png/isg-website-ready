@@ -21,6 +21,7 @@ export const site = {
   finalPromise: "نبني شركات أقوى. ونجهز فرصاً أكثر احترافية.",
   linkedin: "https://www.linkedin.com/company/isg-advisory",
   contactEmail: "Info@isgkw.com",
+  whatsappNumber: "966502817792",
   phoneNote:
     "رقم الهاتف وبيانات قنوات التواصل الإضافية تُضاف فور توفرها من الجهة المعتمدة.",
   footerTagline: "بوابة الحلول المبتكرة — Business & Financial Advisory",
