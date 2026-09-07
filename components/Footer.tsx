@@ -42,6 +42,10 @@ export function Footer() {
               </a>
             </p>
             <p className="flex gap-sm" style={{ margin: 0 }}>
+              <Icon name="mail" size={17} />
+              <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+            </p>
+            <p className="flex gap-sm" style={{ margin: 0 }}>
               <Icon name="phone" size={17} />
               <span className="plain">{site.phoneNote}</span>
             </p>
