@@ -35,20 +35,37 @@ export function Footer() {
           <div>
             <h3>تواصل</h3>
             <span className="h-rule" />
-            <p className="flex gap-sm" style={{ margin: 0 }}>
+            <a
+              className="contact-link flex gap-sm"
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)"
+              style={{ margin: 0 }}
+            >
               <Icon name="trend" size={17} />
-              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — ISG Advisory (يفتح في نافذة جديدة)">
-                LinkedIn — ISG Advisory
-              </a>
-            </p>
-            <p className="flex gap-sm" style={{ margin: 0 }}>
+              <span>LinkedIn — ISG Advisory</span>
+            </a>
+            <a
+              className="contact-link flex gap-sm"
+              href={`mailto:${site.contactEmail}`}
+              aria-label={`راسلنا عبر البريد ${site.contactEmail}`}
+              style={{ margin: 0 }}
+            >
               <Icon name="mail" size={17} />
-              <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
-            </p>
-            <p className="flex gap-sm" style={{ margin: 0 }}>
-              <Icon name="phone" size={17} />
-              <span className="plain">{site.phoneNote}</span>
-            </p>
+              <span>{site.contactEmail}</span>
+            </a>
+            <a
+              className="contact-link flex gap-sm"
+              href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("مرحباً، أود الاستفسار عن خدمات ISG Advisory.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="واتساب — ISG Advisory (يفتح في نافذة جديدة)"
+              style={{ margin: 0 }}
+            >
+              <Icon name="whatsapp" size={17} />
+              <span>واتساب — رقم مباشر</span>
+            </a>
           </div>
         </div>
         <div className="footer-bottom">
