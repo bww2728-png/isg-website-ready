@@ -1,5 +1,6 @@
 import { validateLead } from "@/lib/form";
 import { sendContactEmail } from "@/lib/email";
+import { sendWhatsAppLead } from "@/lib/whatsapp";
 import { saveLead } from "@/lib/leads";
 
 type Bucket = { count: number; resetAt: number };
@@ -78,6 +79,18 @@ export async function POST(request: Request) {
 
   if (!emailResult.sent) {
     console.error("[ISG] Email not sent:", emailResult.transport, emailResult.error);
+  }
+
+  const whatsappResult = await sendWhatsAppLead({
+    name: result.data.name,
+    email: result.data.email,
+    stage: result.data.stage,
+    challenge: result.data.challenge,
+    referenceId: saved,
+  });
+
+  if (!whatsappResult.sent && !whatsappResult.skipped) {
+    console.error("[ISG] WhatsApp not sent:", whatsappResult.error);
   }
 
   return Response.json(
