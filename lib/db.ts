@@ -6,14 +6,40 @@ declare global {
   var __ISG_LEADS_POOL__: Pool | undefined;
 }
 
+function normalizeConnectionString(raw: string): string {
+  try {
+    const url = new URL(raw);
+    url.searchParams.delete("sslmode");
+    return url.toString();
+  } catch {
+    return raw;
+  }
+}
+
+/**
+ * إعدادات TLS حسب وجهة الاتصال:
+ * - داخل الشبكة الخاصة لـ Railway (.railway.internal): الاتصال معزول، ولا TLS.
+ * - خارجها: TLS مع تجاوز فحص الشهادة الموقعة ذاتياً (شهادات Railway).
+ */
+export function sslForHost(host: string | null): false | { rejectUnauthorized: false } {
+  if (host && host.endsWith(".railway.internal")) return false;
+  return { rejectUnauthorized: false };
+}
+
 function createPool(): Pool | undefined {
   if (!connectionString) return undefined;
+  let hostname: string | null = null;
+  try {
+    hostname = new URL(connectionString).hostname;
+  } catch {
+    hostname = null;
+  }
   return new Pool({
-    connectionString,
+    connectionString: normalizeConnectionString(connectionString),
     max: 5,
     connectionTimeoutMillis: 5000,
     idleTimeoutMillis: 30_000,
-    ssl: { rejectUnauthorized: false },
+    ssl: sslForHost(hostname),
   });
 }
 
