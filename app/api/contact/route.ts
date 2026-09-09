@@ -73,10 +73,11 @@ export async function POST(request: Request) {
     email: result.data.email,
     stage: result.data.stage,
     challenge: result.data.challenge,
+    referenceId: saved,
   });
 
   if (!emailResult.sent) {
-    console.error("[ISG] Email not sent:", emailResult.error);
+    console.error("[ISG] Email not sent:", emailResult.transport, emailResult.error);
   }
 
   return Response.json(
