@@ -10,6 +10,8 @@ import {
   industries,
   team,
   insightsPlan,
+  insightsArticles,
+  caseStudies,
 } from "../lib/content";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -52,6 +54,44 @@ test("content.ts contains no forbidden marketing phrases", () => {
   const content = readFileSync(file, "utf8");
   for (const phrase of ["حلول متكاملة", "نفخر", "خبراء متميزون"]) {
     assert.equal(content.includes(phrase), false, `found banned phrase: ${phrase}`);
+  }
+});
+
+test("insights articles: published set matches week-1 plan titles, unique slugs, complete fields", () => {
+  assert.equal(insightsArticles.length, 3);
+  const slugs = new Set<string>();
+  for (const article of insightsArticles) {
+    assert.ok(!slugs.has(article.slug), `duplicate slug ${article.slug}`);
+    slugs.add(article.slug);
+    assert.ok(article.title.trim().length > 0);
+    assert.ok(article.excerpt.trim().length > 0);
+    assert.ok(article.sections.length >= 3, `sections for ${article.slug}`);
+    for (const section of article.sections) {
+      assert.ok(section.heading.trim().length > 0);
+      assert.ok(section.paragraphs.length > 0);
+      for (const p of section.paragraphs) assert.ok(p.trim().length > 0);
+    }
+    assert.ok(article.closing.trim().length > 0);
+  }
+  const planWeek1 = insightsPlan.filter((p) => p.week === "الأسبوع الأول").map((p) => p.title).sort();
+  const publishedTitles = insightsArticles.map((a) => a.title).sort();
+  assert.deepEqual(publishedTitles, planWeek1);
+});
+
+test("case studies: unique slugs, four axes content, valid service link, honesty note", () => {
+  assert.equal(caseStudies.length, 3);
+  const serviceSlugs = new Set(services.map((s) => s.slug));
+  const slugs = new Set<string>();
+  for (const cs of caseStudies) {
+    assert.ok(!slugs.has(cs.slug), `duplicate slug ${cs.slug}`);
+    slugs.add(cs.slug);
+    assert.ok(cs.headline.trim().length > 0);
+    assert.ok(cs.context.trim().length > 0);
+    assert.ok(cs.challenge.trim().length > 0);
+    assert.ok(cs.intervention.length > 0);
+    assert.ok(cs.impact.length > 0);
+    assert.ok(serviceSlugs.has(cs.serviceSlug), `unknown serviceSlug ${cs.serviceSlug}`);
+    assert.ok(cs.note.includes("مجهولة"), `honesty note for ${cs.slug}`);
   }
 });
 

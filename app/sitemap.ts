@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { baseUrl } from "@/lib/seo";
-import { services } from "@/lib/content";
+import { services, insightsArticles } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/services",
     "/industries",
+    "/case-studies",
     "/insights",
     "/tools/self-assessment",
     "/contact",
@@ -16,8 +17,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const serviceRoutes = services.map((service) => `/services/${service.slug}`);
+  const articleRoutes = insightsArticles.map((article) => `/insights/${article.slug}`);
 
-  return [...staticRoutes, ...serviceRoutes].map((route) => ({
+  return [...staticRoutes, ...serviceRoutes, ...articleRoutes].map((route) => ({
     url: `${baseUrl()}${route}`,
     lastModified: new Date(),
   }));

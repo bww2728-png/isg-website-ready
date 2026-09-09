@@ -6,7 +6,7 @@ import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
-import { services } from "@/lib/content";
+import { services, caseStudies } from "@/lib/content";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -31,6 +31,8 @@ export default async function ServicePage({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
+
+  const relatedCases = caseStudies.filter((cs) => cs.serviceSlug === service.slug);
 
   return (
     <>
@@ -181,6 +183,30 @@ export default async function ServicePage({
             return null;
         }
       })}
+
+      {relatedCases.length > 0 ? (
+        <section className="section section-muted">
+          <div className="container">
+            <SectionHeading
+              eyebrow="أعمال ذات صلة"
+              title="حالات مجهولة الهوية تشرح المنهجية"
+              description={relatedCases[0].note}
+            />
+            <div className="grid-2">
+              {relatedCases.map((cs, index) => (
+                <Reveal key={cs.slug} delay={index * 70}>
+                  <Link href="/case-studies" style={{ textDecoration: "none", color: "inherit" }}>
+                    <div className="card accent-top">
+                      <h3 style={{ fontSize: "1.1rem" }}>{cs.headline}</h3>
+                      <p className="mt-2" style={{ marginBottom: 0 }}>{cs.profile} — {cs.sector}</p>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section">
         <div className="container">
