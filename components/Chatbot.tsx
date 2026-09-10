@@ -39,6 +39,7 @@ function saveState(state: ChatClientState) {
 export function Chatbot() {
   const [open, setOpen] = useState(false);
   const [pulse, setPulse] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chips, setChips] = useState<{ label: string; message: string }[]>([]);
   const [input, setInput] = useState("");
@@ -51,8 +52,14 @@ export function Chatbot() {
 
   useEffect(() => {
     chatState.current = loadState();
-    const timer = window.setTimeout(() => setPulse(true), 5000);
-    return () => window.clearTimeout(timer);
+    const pulseTimer = window.setTimeout(() => setPulse(true), 5000);
+    const showTimer = window.setTimeout(() => setShowBubble(true), 4000);
+    const hideTimer = window.setTimeout(() => setShowBubble(false), 10000);
+    return () => {
+      window.clearTimeout(pulseTimer);
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -64,6 +71,7 @@ export function Chatbot() {
   useEffect(() => {
     if (!open) return;
     setPulse(false);
+    setShowBubble(false);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
@@ -252,6 +260,20 @@ export function Chatbot() {
         </form>
       </div>
 
+      {showBubble && !open ? (
+        <div className="chat-bubble" role="status" aria-live="polite">
+          <span>تحتاج مساعدة؟ اسألنا عن أي خدمة.</span>
+          <button
+            type="button"
+            className="chat-bubble-close"
+            aria-label="إغلاق الرسالة"
+            onClick={() => setShowBubble(false)}
+          >
+            ×
+          </button>
+        </div>
+      ) : null}
+
       <button
         type="button"
         className={`chat-fab${pulse && !open ? " pulse" : ""}`}
@@ -259,6 +281,7 @@ export function Chatbot() {
         aria-expanded={open}
         aria-label={open ? "إغلاق المحادثة" : "افتح المحادثة مع مساعد ISG"}
       >
+        {!open ? <span className="chat-fab-badge" aria-hidden="true" /> : null}
         <svg className="chat-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
         </svg>
