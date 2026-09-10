@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 import "./globals.css";
+import "./assistant.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Chatbot } from "@/components/Chatbot";
 import JsonLd from "@/components/JsonLd";
 import { organizationJsonLd, financialServiceJsonLd, baseUrl } from "@/lib/seo";
 
@@ -64,6 +66,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Chatbot />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={financialServiceJsonLd()} />
       </body>
