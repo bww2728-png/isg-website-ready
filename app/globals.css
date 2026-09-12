@@ -282,23 +282,19 @@ html:has(> body) { background: var(--surface); }
 
 /* Brand / Logo */
 .brand { display: inline-flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-800); flex-shrink: 0; }
-.mark-ring {
-  position: relative;
+.brand-logo {
   display: grid;
   place-items: center;
   width: 46px;
   height: 46px;
-  border-radius: 50%;
-  background: radial-gradient(120% 120% at 30% 20%, var(--navy-600), var(--navy-800));
-  color: #fff;
-  font-family: var(--font-latin);
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -1px;
-  box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--border, #e5eaf0);
+  overflow: hidden;
+  flex-shrink: 0;
 }
-.mark-ring:after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--gold-500); opacity: 0.55; }
-.mark-ring b { color: var(--gold-soft); }
+.footer-brand .brand-logo { width: 54px; height: 54px; border-radius: 12px; }
+[data-theme="dark"] .brand-logo { border-color: rgba(255, 255, 255, 0.15); }
 .brand-word { display: flex; flex-direction: column; line-height: 1.35; }
 .brand-word small { color: var(--gold-700); font-family: var(--font-latin); font-size: 0.58rem; letter-spacing: 0.14em; font-weight: 600; display: block; }
 
